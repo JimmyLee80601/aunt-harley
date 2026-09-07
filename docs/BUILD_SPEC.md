@@ -1,14 +1,29 @@
-# BUILD SPEC — Aunt Harley (WinUI 3 / MSIX)
+# BUILD SPEC — Aunt Harley (dual-target: WinUI 3 on Dell + PWA on tablet)
 
-Canonical engineering spec. Version 1.0. Owner: Harley Hive (Dell = build station, Bench = design/QA).
+Canonical engineering spec. Version 1.1. Owner: Harley Hive (Dell = build station, Bench = design/QA).
 
 ## 1. Product Identity
 
 - Product: Aunt Harley — AI step-aunt companion for Trystan
-- Target user: A kid (under 13) on the family Dell, signed into their own Windows profile
+- Target user: A kid (under 13). Two homes:
+  1. Dell workstation — Trystan's own Windows profile → native WinUI 3 app (this doc, most of section 2)
+  2. Revvl 5G-class Android tablet → installable PWA + small on-device brain (see docs/TABLET.md)
+- Same personality, same brand, same 100%-local promise on BOTH targets. No cloud on either.
 - Personality: sweet, patient, playful, encouraging. 100% clean. Zero adult content.
 - Brand: The Squishies (Squish Toast, Strawb, Avocadon't, Boba) — ORIGINAL characters, no IP risk
-- Distribution: signed MSIX installer + GitHub Releases + GitHub Pages site
+- Distribution: Dell = signed MSIX installer + GitHub Releases + GitHub Pages site. Tablet = PWA add-to-home-screen, no store needed.
+
+### 1.1 Dual-target matrix
+
+| | Dell (WinUI 3) | Tablet (PWA) |
+|---|---|---|
+| UI | WinUI 3 desktop app | Installable PWA, full-screen |
+| Brain | EVE Qwen2.5-VL-7B on port 1234 | Qwen2.5-VL-3B Q4_K_M on port 1234 (1.8GB) |
+| Setup | MSIX install once | Termux + llama.cpp + start script (docs/TABLET.md) |
+| Offline | Yes | Yes |
+| Persona | AUNT_HARLEY_PERSONA.md (packaged asset) | Baked into tablet/chat.js |
+| Image chat | Future (vision OK on EVE) | Works now (📷 button, 1024px downscale) |
+| Code lives | src/ (WinUI 3, from Dell) | tablet/ (done) |
 
 ## 2. The "From Walmart" Standard
 
@@ -92,13 +107,16 @@ Design language: soft purple/pink pastels (site palette), rounded corners, frien
 ```
 assets/
   icons/      ← all MSIX logo sizes (DONE)
-  mascots/    ← Squishies PNG + JPG (DONE)
+  mascots/    ← Squishies PNG (DONE)
+  pwa/        ← PWA icons + manifest (DONE)
+tablet/       ← Trystan's tablet app (DONE): index.html, style.css, chat.js, start_aunt_harley.sh
 site/
-  index.html  ← GitHub Pages landing (DONE)
+  index.html  ← GitHub Pages landing (DONE — now at repo root for Pages)
   style.css   ← (DONE)
 docs/
   BUILD_SPEC.md   ← this file
   SIGNING.md      ← signing guide
+  TABLET.md       ← tablet setup guide
 src/
   (WinUI3 code lands here from the Dell)
 ```

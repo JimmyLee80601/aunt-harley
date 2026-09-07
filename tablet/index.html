@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aunt Harley</title>
+<meta name="description" content="Aunt Harley lives on your tablet, 100% local and private.">
+<link rel="manifest" href="../assets/pwa/manifest.webmanifest">
+<link rel="icon" type="image/png" href="../assets/pwa/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/pwa/apple-touch-icon.png">
+<meta name="theme-color" content="#2b2440">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <img src="../assets/pwa/icon-192.png" alt="Aunt Harley" class="mark">
+  <div class="title">
+    <h1>Aunt Harley</h1>
+    <span id="brain-status" class="status">checking brain…</span>
+  </div>
+  <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
+</header>
+
+<main id="chat" class="chat" aria-live="polite">
+  <div class="welcome" id="welcome">
+    <img src="../assets/mascots/squishies-hero.png" alt="The Squishies" class="welcome-art">
+    <p class="greeting">Hey kiddo. I'm Aunt Harley.</p>
+    <p class="welcome-text">Ask me anything — homework, Roblox Studio, shirt ideas, or just venting. Everything we say stays right here on your tablet.</p>
+  </div>
+</main>
+
+<footer class="composer">
+  <button id="attach-btn" class="icon-btn" aria-label="Attach a picture" title="Share a picture">📷</button>
+  <input type="file" id="file-input" accept="image/*" hidden>
+  <div id="attach-preview" class="attach-preview" hidden>
+    <img id="attach-img" alt="Attached picture">
+    <button id="attach-remove" class="icon-btn small">✕</button>
+  </div>
+  <textarea id="input" rows="1" placeholder="Say hi, kiddo…" aria-label="Message"></textarea>
+  <button id="send-btn" class="send-btn" aria-label="Send">➤</button>
+</footer>
+
+<div id="settings" class="settings" hidden>
+  <div class="settings-panel">
+    <h2>Settings</h2>
+    <label>Brain address
+      <input id="set-endpoint" type="text" placeholder="http://127.0.0.1:1234/v1">
+    </label>
+    <label>Model name
+      <input id="set-model" type="text" placeholder="aunt-harley">
+    </label>
+    <p class="hint">The brain is Aunt Harley's little on-device model. If she's not answering, ask dad to open Termux and run <code>./start_aunt_harley.sh</code>.</p>
+    <button id="save-settings" class="primary">Save</button>
+    <button id="clear-chat" class="danger">Start a fresh chat</button>
+    <button id="close-settings" class="ghost">Close</button>
+  </div>
+</div>
+
+<script src="chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+/* Aunt Harley tablet PWA — pastel, soft, kid-first */
+:root {
+  --ink: #2b2440;
+  --pink: #ff5fa8;
+  --purple: #8b5cf6;
+  --lilac: #f4eefe;
+  --cream: #fff8f0;
+  --muted: #7a6f95;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* Top bar */
+.topbar {
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  padding-top: calc(10px + env(safe-area-inset-top));
+  flex-shrink: 0;
+}
+.mark { width: 36px; height: 36px; border-radius: 10px; }
+.title { flex: 1; }
+.title h1 { font-size: 1.05rem; line-height: 1.1; }
+.status { font-size: 0.72rem; color: #b9aee0; }
+.status.on { color: var(--lime, #b4f34c); }
+.status.off { color: #ff8fa3; }
+
+.icon-btn {
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+.icon-btn:active { background: rgba(255,255,255,0.25); }
+.icon-btn.small { width: 28px; height: 28px; font-size: 0.9rem; }
+
+/* Chat */
+.chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+.welcome { text-align: center; margin: auto 0; padding: 12px; }
+.welcome-art { width: min(220px, 60vw); margin: 0 auto 14px; border-radius: 20px; }
+.greeting { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+.welcome-text { color: var(--muted); font-size: 0.98rem; line-height: 1.55; }
+
+.msg {
+  max-width: 84%;
+  padding: 11px 14px;
+  border-radius: 18px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  animation: pop 0.18s ease;
+}
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+
+.msg.user {
+  align-self: flex-end;
+  background: var(--pink);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.msg.bot {
+  align-self: flex-start;
+  background: var(--card);
+  border: 1px solid #ece2f8;
+  border-bottom-left-radius: 6px;
+}
+.msg .pic { max-width: 200px; max-height: 200px; border-radius: 12px; margin-bottom: 6px; display: block; }
+
+.typing { align-self: flex-start; display: flex; gap: 5px; padding: 12px 16px; }
+.typing span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--purple);
+  animation: blink 1.2s infinite;
+}
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%,80%,100% { opacity: 0.25; } 40% { opacity: 1; } }
+
+/* Composer */
+.composer {
+  background: var(--card);
+  border-top: 1px solid #ece2f8;
+  padding: 10px 12px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.composer .icon-btn { background: var(--lilac); color: var(--purple); flex-shrink: 0; }
+.attach-preview { position: relative; margin-bottom: 6px; }
+.attach-preview img { max-width: 56px; max-height: 56px; border-radius: 10px; }
+.attach-preview .icon-btn { position: absolute; top: -8px; right: -8px; }
+.composer textarea {
+  flex: 1;
+  border: 1px solid #ece2f8;
+  border-radius: 20px;
+  padding: 11px 16px;
+  font: inherit;
+  font-size: 0.98rem;
+  resize: none;
+  max-height: 120px;
+  background: var(--cream);
+  color: var(--ink);
+}
+.send-btn {
+  background: var(--purple);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.send-btn:active { transform: scale(0.94); }
+
+/* Settings */
+.settings {
+  position: fixed;
+  inset: 0;
+  background: rgba(43,36,64,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 20;
+}
+.settings-panel {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 22px;
+  width: min(420px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.settings-panel h2 { font-size: 1.2rem; }
+.settings-panel label { display: flex; flex-direction: column; gap: 5px; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+.settings-panel input {
+  border: 1px solid #ece2f8;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+}
+.hint { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.hint code { background: var(--lilac); padding: 1px 5px; border-radius: 6px; }
+.settings-panel button { padding: 12px; border-radius: 14px; border: none; font-weight: 600; font-size: 0.95rem; }
+.primary { background: var(--pink); color: #fff; }
+.danger { background: #ffe3ec; color: #c2255c; }
+.ghost { background: var(--lilac); color: var(--purple); }
