@@ -14,4 +14,5 @@ Assets: assets/mascots (Squishies), assets/icons (all MSIX logo sizes)
 - WinUI 3 app: in development (build on Dell workstation)
 - Signing: guide complete, cert pending
 
-Built with love by the Harley Hive for Trystan. Not affiliated with Roblox Corporation.
+Built with love by Jimmy Lee, Jeannine, and Harley — forever 💕
+Not affiliated with Roblox Corporation.
